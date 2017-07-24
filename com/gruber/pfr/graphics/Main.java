@@ -369,6 +369,8 @@ public class Main {
 //		charts.add(new Torus2Chart());
 		charts.add(new Sphere2ChartProj());
 
-		return new RealBasedCurves2DMultiProjection(new Sphere2Manifold(charts, 0, 10), config);
+		RealBasedCurves2DMultiProjection proj = new RealBasedCurves2DMultiProjection(new Sphere2Manifold(charts, 0, 10), config);
+		proj.setFunctionTypeCoordinates(GraphWizard.FunctionType.LINE_STRAIGHT);;
+		return proj;
 	}
 }

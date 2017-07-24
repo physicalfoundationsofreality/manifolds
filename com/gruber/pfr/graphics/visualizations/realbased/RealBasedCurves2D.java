@@ -14,6 +14,7 @@ public class RealBasedCurves2D implements Visualization2D {
 
 	RealBasedVisualization curves;
 	GraphWizard.FunctionType functionType;
+	Coordinates2D coord;
 
 	public RealBasedCurves2D(RealBasedVisualization curves, GraphWizard.FunctionType functionType) {
 		this.curves = curves;
@@ -44,15 +45,14 @@ public class RealBasedCurves2D implements Visualization2D {
 	public int getLength() {
 		return this.curves.getLength();
 	}
-	
-	public Coordinates2D getCoordinates() {
-
-		Coordinates coord = this.curves.getCoordinates();
-		return new Coordinates2D(coord.getMin(0), coord.getMax(0), coord.getMin(1), coord.getMax(1));
-	}
 
 	public void setDisplayParameters(int granularity) {
 		this.curves.setDisplayParameters(granularity);
+	}
+
+	public Coordinates2D getCoordinates() {
+
+		return coord;
 	}
 
 }

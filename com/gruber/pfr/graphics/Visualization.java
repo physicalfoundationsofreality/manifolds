@@ -4,7 +4,7 @@ import com.gruber.pfr.graphics.elements.Coordinates;
 
 public interface Visualization {
 	
-	public Coordinates getCoordinates();
+//	public Coordinates getCoordinates();
 	
 	public void setDisplayParameters(int granularity);
 	

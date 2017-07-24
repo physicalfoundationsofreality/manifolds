@@ -14,7 +14,6 @@ public class RealBasedCurvesProjection implements RealBasedVisualization {
 
 	RealBasedVisualization vis;
 	FiniteDimensionalLinearMap projection;
-	Coordinates coord;
 	List<RealBasedCurve> curves;
 
 	public RealBasedCurvesProjection(RealBasedVisualization vis, FiniteDimensionalLinearMap projection) {
@@ -24,43 +23,43 @@ public class RealBasedCurvesProjection implements RealBasedVisualization {
 
 	public Coordinates getCoordinates() {
 
-		if (coord != null)
-			return coord;
-
-		try {
-			int[] min = this.vis.getCoordinates().getMin();
-			RealNumber[] nums = new RealNumber[min.length];
-			for (int i = 0; i < min.length; i++)
-				nums[i] = new RealNumber(min[i]);
-
-			RealVector vec = new RealVector(nums);
-			vec = (RealVector) this.projection.getImage(vec);
-			nums = vec.getElements();
-			int[] projMin = new int[nums.length];
-
-			for (int i = 0; i < nums.length; i++)
-				projMin[i] = new Double(Math.floor(new Double(nums[i].getBase()).doubleValue())).intValue();
-
-			int[] max = this.vis.getCoordinates().getMax();
-			nums = new RealNumber[max.length];
-			for (int i = 0; i < max.length; i++)
-				nums[i] = new RealNumber(max[i]);
-
-			vec = new RealVector(nums);
-			vec = (RealVector) this.projection.getImage(vec);
-			nums = vec.getElements();
-			int[] projMax = new int[nums.length];
-
-			for (int i = 0; i < nums.length; i++)
-				projMax[i] = new Double(Math.floor(new Double(nums[i].getBase()).doubleValue())).intValue();
-
-			coord = new Coordinates(projMin, projMax);
-			return coord;
-
-		} catch (InvalidElementsException e) {
-			e.printStackTrace();
+//		if (coord != null)
+//			return coord;
+//
+//		try {
+//			int[] min = this.vis.getCoordinates().getMin();
+//			RealNumber[] nums = new RealNumber[min.length];
+//			for (int i = 0; i < min.length; i++)
+//				nums[i] = new RealNumber(min[i]);
+//
+//			RealVector vec = new RealVector(nums);
+//			vec = (RealVector) this.projection.getImage(vec);
+//			nums = vec.getElements();
+//			int[] projMin = new int[nums.length];
+//
+//			for (int i = 0; i < nums.length; i++)
+//				projMin[i] = new Double(Math.floor(new Double(nums[i].getBase()).doubleValue())).intValue();
+//
+//			int[] max = this.vis.getCoordinates().getMax();
+//			nums = new RealNumber[max.length];
+//			for (int i = 0; i < max.length; i++)
+//				nums[i] = new RealNumber(max[i]);
+//
+//			vec = new RealVector(nums);
+//			vec = (RealVector) this.projection.getImage(vec);
+//			nums = vec.getElements();
+//			int[] projMax = new int[nums.length];
+//
+//			for (int i = 0; i < nums.length; i++)
+//				projMax[i] = new Double(Math.floor(new Double(nums[i].getBase()).doubleValue())).intValue();
+//
+//			coord = new Coordinates(projMin, projMax);
+//			return coord;
+//
+//		} catch (InvalidElementsException e) {
+//			e.printStackTrace();
 			return null;
-		}
+//		}
 	}
 
 	public void setDisplayParameters(int granularity) {

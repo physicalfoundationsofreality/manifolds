@@ -126,7 +126,8 @@ public class GraphWizard extends JApplet {
 							float posY = (offY - vec.getOrigin().getCoordinates()[1]) * sizeFact[1] + 10;
 
 							if (curve.getFunctionType().equals(FunctionType.SINGLE_POINT)
-									|| curve.getFunctionType().equals(FunctionType.SINGLE_POINT_TANGENT))
+									|| curve.getFunctionType().equals(FunctionType.SINGLE_POINT_TANGENT)
+									|| count == 0)
 								path.moveTo(posX, posY);
 
 							g2.setColor(curve.getOriginColor());

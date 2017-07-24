@@ -16,18 +16,11 @@ import com.gruber.pfr.space.numbers.real.RnSpace;
 
 public class Sphere2Manifold extends RnEmbeddedManifold {
 	
-	Coordinates coord;
 	List<RealBasedCurve> curves;
 	
 	public Sphere2Manifold(List<Chart> charts, int length, int granularity) {
 		
 		super(length, granularity);
-		
-		int[] min = { -1, -1 , -1 };
-		int[] max = { 1, 1 , 1 };
-		Coordinates coord = new Coordinates(min, max);
-		this.coord = coord;
-		
 		this.setAtlas(new Atlas(charts));
 	}
 
@@ -56,9 +49,5 @@ public class Sphere2Manifold extends RnEmbeddedManifold {
 
 		RealVector vec = (RealVector)RnSpace.getInstance(3).getRandomElement();
 		return vec.multiply(new RealNumber(1/vec.getLength()));
-	}
-
-	public Coordinates getCoordinates() {
-		return coord;
 	}
 }

@@ -57,8 +57,4 @@ public class Torus2Manifold extends RnEmbeddedManifold {
 
 		return null;
 	}
-
-	public Coordinates getCoordinates() {
-		return null;
-	}
 }

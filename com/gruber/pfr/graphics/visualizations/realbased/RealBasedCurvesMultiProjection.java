@@ -33,66 +33,70 @@ public class RealBasedCurvesMultiProjection implements RealBasedVisualization {
 		}
 		this.map2d = map2d;
 	}
+	
+	public void setCoordinates(Coordinates coord) {
+		this.coord = coord;
+	}
 
 	public Coordinates getCoordinates() {
 
-		if (coord != null)
+//		if (coord != null)
 			return coord;
-
-		try {
-
-			int[][] projMin = new int[projections.length][];
-			int[][] projMax = new int[projections.length][];
-			
-			for (int k = 0; k < this.projections.length; k++) {
-
-				int[] min = this.vis.getCoordinates().getMin();
-				RealNumber[] numsMin = new RealNumber[min.length];
-				for (int i = 0; i < min.length; i++)
-					numsMin[i] = new RealNumber(min[i]);
-				
-				RealVector vec = new RealVector(numsMin);
-				vec = (RealVector) this.projections[k].getProjection().getImage(vec);
-				numsMin = vec.getElements();
-				projMin[k] = new int[numsMin.length];
-
-				for (int i = 0; i < numsMin.length; i++)
-					projMin[k][i] = new Double(Math.floor(new Double(numsMin[i].getBase()).doubleValue())).intValue();
-
-				int[] max = this.vis.getCoordinates().getMax();
-				RealNumber[]  numsMax = new RealNumber[max.length];
-				for (int i = 0; i < max.length; i++)
-					numsMax[i] = new RealNumber(max[i]);
-				
-				vec = new RealVector(numsMax);
-				vec = (RealVector) this.projections[k].getProjection().getImage(vec);
-				numsMax = vec.getElements();
-				projMax[k] = new int[numsMax.length];
-
-				for (int i = 0; i < numsMax.length; i++)
-					projMax[k][i] = new Double(Math.floor(new Double(numsMax[i].getBase()).doubleValue())).intValue();
-
-			}
-			int[] totMin = Arrays.copyOf(projMin[0], projMin[0].length);
-			int[] totMax = Arrays.copyOf(projMax[0], projMax[0].length);
-
-			for (int k = 1; k < this.projections.length; k++) {
-
-				for (int i = 0; i < projMin[k].length; i++) {
-					totMin[i] = Math.min(totMin[i], projMin[k][i]);
-					totMax[i] = Math.max(totMax[i], projMax[k][i]);
-				}
-			}
-
-			coord = new Coordinates(totMin, totMax);
-			return coord;
-
-		} catch (
-
-		InvalidElementsException e) {
-			e.printStackTrace();
-			return null;
-		}
+//
+//		try {
+//
+//			int[][] projMin = new int[projections.length][];
+//			int[][] projMax = new int[projections.length][];
+//			
+//			for (int k = 0; k < this.projections.length; k++) {
+//
+//				int[] min = this.vis.getCoordinates().getMin();
+//				RealNumber[] numsMin = new RealNumber[min.length];
+//				for (int i = 0; i < min.length; i++)
+//					numsMin[i] = new RealNumber(min[i]);
+//				
+//				RealVector vec = new RealVector(numsMin);
+//				vec = (RealVector) this.projections[k].getProjection().getImage(vec);
+//				numsMin = vec.getElements();
+//				projMin[k] = new int[numsMin.length];
+//
+//				for (int i = 0; i < numsMin.length; i++)
+//					projMin[k][i] = new Double(Math.floor(new Double(numsMin[i].getBase()).doubleValue())).intValue();
+//
+//				int[] max = this.vis.getCoordinates().getMax();
+//				RealNumber[]  numsMax = new RealNumber[max.length];
+//				for (int i = 0; i < max.length; i++)
+//					numsMax[i] = new RealNumber(max[i]);
+//				
+//				vec = new RealVector(numsMax);
+//				vec = (RealVector) this.projections[k].getProjection().getImage(vec);
+//				numsMax = vec.getElements();
+//				projMax[k] = new int[numsMax.length];
+//
+//				for (int i = 0; i < numsMax.length; i++)
+//					projMax[k][i] = new Double(Math.floor(new Double(numsMax[i].getBase()).doubleValue())).intValue();
+//
+//			}
+//			int[] totMin = Arrays.copyOf(projMin[0], projMin[0].length);
+//			int[] totMax = Arrays.copyOf(projMax[0], projMax[0].length);
+//
+//			for (int k = 1; k < this.projections.length; k++) {
+//
+//				for (int i = 0; i < projMin[k].length; i++) {
+//					totMin[i] = Math.min(totMin[i], projMin[k][i]);
+//					totMax[i] = Math.max(totMax[i], projMax[k][i]);
+//				}
+//			}
+//
+//			coord = new Coordinates(totMin, totMax);
+//			return coord;
+//
+//		} catch (
+//
+//		InvalidElementsException e) {
+//			e.printStackTrace();
+//			return null;
+//		}
 	}
 
 	public void setDisplayParameters(int granularity) {
