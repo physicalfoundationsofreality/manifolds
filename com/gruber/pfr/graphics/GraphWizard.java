@@ -25,16 +25,16 @@ public class GraphWizard extends JApplet {
 
 	public static enum FunctionType {
 
-		SINGLE_POINT, SINGLE_POINT_TANGENT, LINE_STRAIGHT, LINE_STRAIGHT_TANGENT;// ,
-																					// LINE_QUADRATIC,
-																					// LINE_CUBIC
+		NONE, SINGLE_POINT, SINGLE_POINT_TANGENT, LINE_STRAIGHT, LINE_STRAIGHT_TANGENT;// ,
+																						// LINE_QUADRATIC,
+																						// LINE_CUBIC
 	}
 
 	class GraphicsSettings {
 
 		Visualization2D vis;
 		Dimension dim;
-//		FunctionType type;
+		// FunctionType type;
 		int totalLength;
 		List<SimpleCurve> paths;
 
@@ -58,13 +58,13 @@ public class GraphWizard extends JApplet {
 			this.dim = dim;
 		}
 
-//		public FunctionType getType() {
-//			return type;
-//		}
-//
-//		public void setType(FunctionType type) {
-//			this.type = type;
-//		}
+		// public FunctionType getType() {
+		// return type;
+		// }
+		//
+		// public void setType(FunctionType type) {
+		// this.type = type;
+		// }
 
 		public int getTotalLength() {
 			return totalLength;
@@ -102,12 +102,15 @@ public class GraphWizard extends JApplet {
 			float[] sizeFact = drawCoordinates(g2);
 
 			Coordinates2D coord = this.settings.vis.getCoordinates();
-			float offX = coord.getMinX(); 
+			float offX = coord.getMinX();
 			float offY = coord.getMaxY();
 
-		while (paths.hasNext()) {
+			while (paths.hasNext()) {
 
 				SimpleCurve curve = paths.next();
+				if (curve.getFunctionType().equals(FunctionType.NONE))
+					continue;
+
 				// List<SimpleVector> points = curve.getVectors().iterator();
 				if (!curve.hasNext())
 					continue;
@@ -122,12 +125,12 @@ public class GraphWizard extends JApplet {
 
 						if (curve.hasNext()) {
 							vec = curve.getNext();
+
 							float posX = (vec.getOrigin().getCoordinates()[0] - offX) * sizeFact[0] + 10;
 							float posY = (offY - vec.getOrigin().getCoordinates()[1]) * sizeFact[1] + 10;
 
 							if (curve.getFunctionType().equals(FunctionType.SINGLE_POINT)
-									|| curve.getFunctionType().equals(FunctionType.SINGLE_POINT_TANGENT)
-									|| count == 0)
+									|| curve.getFunctionType().equals(FunctionType.SINGLE_POINT_TANGENT) || count == 0)
 								path.moveTo(posX, posY);
 
 							g2.setColor(curve.getOriginColor());
@@ -163,7 +166,7 @@ public class GraphWizard extends JApplet {
 		this.settings = new GraphicsSettings();
 		this.settings.setVis(vis);
 		this.settings.setDim(dim);
-//		this.settings.setType(type);
+		// this.settings.setType(type);
 		this.settings.setPaths(vis.getCurves());
 
 		if (animate)

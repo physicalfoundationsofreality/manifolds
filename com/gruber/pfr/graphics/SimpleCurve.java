@@ -15,13 +15,25 @@ public class SimpleCurve {
 
 	ArrayList<SimpleVector> curve = new ArrayList<SimpleVector>();
 
-	public SimpleCurve(Color originColor, Color directionColor, SimpleVector startingPoint, GraphWizard.FunctionType functionType) {
+	public SimpleCurve(Color originColor, Color directionColor, GraphWizard.FunctionType functionType) {
+
+		super();
+		this.originColor = originColor;
+		this.directionColor = directionColor;
+		this.position = 0;
+
+		this.functionType = functionType;
+	}
+
+	public SimpleCurve(Color originColor, Color directionColor, SimpleVector startingPoint,
+			GraphWizard.FunctionType functionType) {
 
 		super();
 		this.originColor = originColor;
 		this.directionColor = directionColor;
 		this.startingPoint = startingPoint;
 		this.position = -1;
+
 		this.functionType = functionType;
 	}
 

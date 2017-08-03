@@ -7,7 +7,6 @@ import java.util.List;
 import com.gruber.pfr.graphics.GraphWizard;
 import com.gruber.pfr.graphics.SimpleCurve;
 import com.gruber.pfr.graphics.Visualization2D;
-import com.gruber.pfr.graphics.elements.Coordinates;
 import com.gruber.pfr.graphics.elements.Coordinates2D;
 
 public class RealBasedCurves2D implements Visualization2D {
@@ -30,8 +29,7 @@ public class RealBasedCurves2D implements Visualization2D {
 		while (curvesIter.hasNext()) {
 
 			RealBasedCurve realCurve = curvesIter.next();
-			SimpleCurve curve = new SimpleCurve(realCurve.getOriginColor(), realCurve.getDirectionColor(),
-					realCurve.getStartingPoint().asVector(), this.functionType);
+			SimpleCurve curve = new SimpleCurve(realCurve.getOriginColor(), realCurve.getDirectionColor(), this.functionType);
 
 			Iterator<RealBasedVector> curveIter = realCurve.getCurve().iterator();
 			while (curveIter.hasNext())

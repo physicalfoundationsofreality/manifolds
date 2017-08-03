@@ -32,12 +32,16 @@ import com.gruber.pfr.graphics.visualizations.realbased.RealBasedCurvesProjectio
 import com.gruber.pfr.graphics.visualizations.realbased.RealBasedVector;
 import com.gruber.pfr.graphics.visualizations.realbased.RealBasedVisualization;
 import com.gruber.pfr.space.manifold.Chart;
+import com.gruber.pfr.space.manifold.realembedded.impl.Sphere2ChartPolar;
+import com.gruber.pfr.space.manifold.realembedded.impl.Sphere2ChartPolarAlt;
+import com.gruber.pfr.space.manifold.realembedded.impl.Sphere2ChartPolarAlt2;
 import com.gruber.pfr.space.manifold.realembedded.impl.Sphere2ChartProj;
 import com.gruber.pfr.space.manifold.realembedded.impl.Sphere2Manifold;
 import com.gruber.pfr.space.numbers.real.RealNumber;
 import com.gruber.pfr.space.numbers.real.RealNumbers;
 import com.gruber.pfr.space.numbers.real.RealVector;
 import com.gruber.pfr.space.numbers.real.RnSpace;
+import com.gruber.pfr.space.vectors.knspaces.KnVector.InvalidElementsException;
 import com.gruber.pfr.space.vectors.knspaces.phasespace.PhaseSpace;
 import com.gruber.pfr.space.vectors.linearmaps.FiniteDimensionalLinearMap;
 import com.gruber.pfr.space.vectors.linearmaps.FiniteMatrix;
@@ -51,7 +55,7 @@ public class Main {
 		JFrame f = new JFrame("Graph Wizard");
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		GraphWizard ap = new GraphWizard(manifoldCoordinates(), new Dimension(1100, 1100), false);
+		GraphWizard ap = new GraphWizard(manifoldSimplePath(), new Dimension(1100, 1100), false);
 
 		ap.init();
 		ap.start();
@@ -349,14 +353,16 @@ public class Main {
 				{ new RealNumber(0), new RealNumber(0), new RealNumber(1) } };
 
 		RealNumber[][] proj3 = {
-				{ new RealNumber(new Double(0.5).floatValue()), new RealNumber(new Double(0.5).floatValue()), 
-					new RealNumber(new Double(1 / Math.sqrt(2)).floatValue()) },
-				{ new RealNumber(new Double(-0.5).floatValue()), new RealNumber(new Double(-0.5).floatValue()), 
+				{ new RealNumber(new Double(0.5).floatValue()), new RealNumber(new Double(0.5).floatValue()),
+						new RealNumber(new Double(1 / Math.sqrt(2)).floatValue()) },
+				{ new RealNumber(new Double(-0.5).floatValue()), new RealNumber(new Double(-0.5).floatValue()),
 						new RealNumber(new Double(1 / Math.sqrt(2)).floatValue()) } };
-//		RealNumber[][] proj3 = {
-//				{ new RealNumber(1/2), new RealNumber(1/2), new RealNumber(new Double(1 / Math.sqrt(2)).floatValue()) },
-//				{ new RealNumber(-1/2), new RealNumber(-1/2), new RealNumber(new Double(1 / Math.sqrt(2)).floatValue()) } };
-		
+		// RealNumber[][] proj3 = {
+		// { new RealNumber(1/2), new RealNumber(1/2), new RealNumber(new
+		// Double(1 / Math.sqrt(2)).floatValue()) },
+		// { new RealNumber(-1/2), new RealNumber(-1/2), new RealNumber(new
+		// Double(1 / Math.sqrt(2)).floatValue()) } };
+
 		FiniteMatrix matrix = new FiniteMatrix(RealNumbers.getInstance(), proj1);
 		FiniteDimensionalLinearMap map2d = new FiniteDimensionalLinearMap(RnSpace.getInstance(3).getStandardBasis(),
 				RnSpace.getInstance(2).getStandardBasis(), matrix);
@@ -365,12 +371,63 @@ public class Main {
 				new Projection2DConfiguration(Color.BLACK, Color.BLACK, map2d, new Coordinates2D(-1, 1, -1, 1)) };
 
 		ArrayList<Chart> charts = new ArrayList<Chart>();
-//		charts.add(new Sphere2ChartPolar());
-//		charts.add(new Torus2Chart());
+		// charts.add(new Sphere2ChartPolar());
+		// charts.add(new Torus2Chart());
 		charts.add(new Sphere2ChartProj());
 
-		RealBasedCurves2DMultiProjection proj = new RealBasedCurves2DMultiProjection(new Sphere2Manifold(charts, 0, 10), config);
-		proj.setFunctionTypeCoordinates(GraphWizard.FunctionType.LINE_STRAIGHT);;
+		RealBasedCurves2DMultiProjection proj = new RealBasedCurves2DMultiProjection(
+				new Sphere2Manifold(charts, 10, 10), config);
+		proj.setFunctionTypeCoordinates(GraphWizard.FunctionType.LINE_STRAIGHT);
+		;
 		return proj;
+	}
+
+	public static RealBasedCurves2DMultiProjection manifoldSimplePath() {
+
+		RealNumber[][] proj1 = { { new RealNumber(1), new RealNumber(0), new RealNumber(0) },
+				{ new RealNumber(0), new RealNumber(1), new RealNumber(0) } };
+
+		RealNumber[][] proj2 = { { new RealNumber(1), new RealNumber(0), new RealNumber(0) },
+				{ new RealNumber(0), new RealNumber(0), new RealNumber(1) } };
+
+		RealNumber[][] proj3 = {
+				{ new RealNumber(new Double(0.5).floatValue()), new RealNumber(new Double(0.5).floatValue()),
+						new RealNumber(new Double(1 / Math.sqrt(2)).floatValue()) },
+				{ new RealNumber(new Double(-0.5).floatValue()), new RealNumber(new Double(-0.5).floatValue()),
+						new RealNumber(new Double(1 / Math.sqrt(2)).floatValue()) } };
+		// RealNumber[][] proj3 = {
+		// { new Double(1.0/2).floatValue()), new RealNumber(new
+		// Double(1.0/2).floatValue()), new RealNumber(new
+		// Double(1 / Math.sqrt(2)).floatValue()) },
+		// { new RealNumber(-1/2), new RealNumber(-1/2), new RealNumber(new
+		// Double(1 / Math.sqrt(2)).floatValue()) } };
+
+		FiniteMatrix matrix = new FiniteMatrix(RealNumbers.getInstance(), proj1);
+		FiniteDimensionalLinearMap map2d = new FiniteDimensionalLinearMap(RnSpace.getInstance(3).getStandardBasis(),
+				RnSpace.getInstance(2).getStandardBasis(), matrix);
+
+		Projection2DConfiguration[] config = {
+				new Projection2DConfiguration(Color.BLACK, Color.BLACK, map2d, new Coordinates2D(-1, 1, -1, 1)) };
+
+		ArrayList<Chart> charts = new ArrayList<Chart>();
+		charts.add(new Sphere2ChartPolar());
+		charts.add(new Sphere2ChartPolarAlt());
+		charts.add(new Sphere2ChartPolarAlt2());
+		// charts.add(new Sphere2ChartProj());
+
+		RealNumber[] els = { new RealNumber(new Double(1.0 / 2).floatValue()),
+				new RealNumber(new Double(1.0 / 2).floatValue()),
+				new RealNumber(new Double(1 / Math.sqrt(2)).floatValue()) };
+		try {
+			RealVector start = new RealVector(els);
+
+			RealBasedCurves2DMultiProjection proj = new RealBasedCurves2DMultiProjection(
+					new Sphere2Manifold(start, charts, 100, 100), config);
+			proj.setFunctionTypeCoordinates(GraphWizard.FunctionType.NONE);
+			return proj;
+		} catch (InvalidElementsException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 }

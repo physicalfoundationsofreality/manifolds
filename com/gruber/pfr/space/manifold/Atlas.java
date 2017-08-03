@@ -18,6 +18,20 @@ public class Atlas {
 	public List<Chart> getCharts() {
 		return charts;
 	}
+	
+	public List<Chart> getCoveringCharts(Set point) {
+		
+		ArrayList<Chart> cov = new ArrayList<Chart>();
+		
+		Iterator<Chart> iter = charts.iterator();
+		while(iter.hasNext()) {
+			Chart chart = iter.next();
+			
+			if(chart.isInDomain(point))
+				cov.add(chart);
+		}
+		return cov;
+	}
 
 	public Manifold getManifold() {
 		return manifold;
@@ -25,19 +39,5 @@ public class Atlas {
 
 	public void setManifold(Manifold manifold) {
 		this.manifold = manifold;
-	}
-
-	public List<Chart> getChartsContainingPoint(Set point) {
-
-		ArrayList<Chart> pointCharts = new ArrayList<Chart>();
-		Iterator<Chart> iter = this.charts.iterator();
-		while(iter.hasNext()) {
-			
-			Chart chart = iter.next();
-			if(chart.isInDomain(point))
-				pointCharts.add(chart);
-		}
-		
-		return pointCharts;
 	}
 }

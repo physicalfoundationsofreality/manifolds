@@ -1,7 +1,5 @@
 package com.gruber.pfr.space.manifold;
 
-import java.util.List;
-
 import com.gruber.pfr.space.base.Set;
 import com.gruber.pfr.space.base.map.Map;
 import com.gruber.pfr.space.numbers.real.RealVector;
@@ -16,4 +14,6 @@ public interface Chart extends Map {
 	
 	public boolean isInRange(RealVector point);
 	
+	public RealVector getDirection(RealVector vector);
+
 }

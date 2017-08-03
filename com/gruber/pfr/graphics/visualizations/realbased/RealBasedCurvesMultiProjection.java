@@ -1,15 +1,12 @@
 package com.gruber.pfr.graphics.visualizations.realbased;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
 import com.gruber.pfr.graphics.elements.Coordinates;
 import com.gruber.pfr.graphics.visualizations.phasespace.PhaseSpaceProjectionConfiguration;
-import com.gruber.pfr.space.numbers.real.RealNumber;
 import com.gruber.pfr.space.numbers.real.RealVector;
-import com.gruber.pfr.space.vectors.knspaces.KnVector.InvalidElementsException;
 import com.gruber.pfr.space.vectors.linearmaps.FiniteDimensionalLinearMap;
 import com.gruber.pfr.space.vectors.linearmaps.FiniteMatrix;
 

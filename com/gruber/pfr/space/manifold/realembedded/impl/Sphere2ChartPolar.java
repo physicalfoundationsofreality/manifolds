@@ -35,16 +35,23 @@ public class Sphere2ChartPolar implements RnEmbeddedChart {
 
 		RealVector vec = (RealVector) point;
 		float phi;
-		if (vec.getElements()[0].getBase() == 0)
-			phi = 0;
-		else if (vec.getElements()[2].getBase() == 0 && vec.getElements()[0].getBase() < 0)
-			phi = -1;
+		// if (vec.getElements()[0].getBase() == 0)
+		// phi = 0;
+		// else
+		if (vec.getElements()[2].getBase() == 0 && vec.getElements()[0].getBase() < 0)
+			phi = new Double(Math.PI * 3 / 2).floatValue();
 		else if (vec.getElements()[2].getBase() == 0 && vec.getElements()[0].getBase() > 0)
-			phi = 1;
+			phi = new Double(Math.PI / 2).floatValue();
 		else
 			phi = new Double(Math.atan(vec.getElements()[0].getBase() / vec.getElements()[2].getBase())).floatValue();
+		
+		if(phi < 0)
+			phi += Math.PI * 2;
 
 		float psi = new Double(Math.asin(vec.getElements()[1].getBase())).floatValue();
+		
+		if(psi >  Math.PI / 2)
+			psi = new Double(psi - Math.PI).floatValue();
 
 		RealNumber[] elements = { new RealNumber(phi), new RealNumber(psi) };
 
@@ -78,11 +85,12 @@ public class Sphere2ChartPolar implements RnEmbeddedChart {
 
 	public boolean isInDomain(Set point) {
 		RealVector vec = (RealVector) point;
-		if (!(vec.getDim() == 3 && vec.getLength() == 1))
-			return false;
+//		if (!(vec.getDim() == 3 && vec.getLength() == 1))  We assume the point from manifold
+//		return false;
+
 
 		RealNumber nullEl = (RealNumber) RealNumbers.getInstance().getNullElement();
-		return vec.getElements()[0].equals(nullEl) || vec.getElements()[2].greaterThen(nullEl);
+		return !vec.getElements()[0].equals(nullEl) || vec.getElements()[2].greaterThen(nullEl);
 	}
 
 	public boolean isInRange(RealVector vec) {
@@ -112,7 +120,7 @@ public class Sphere2ChartPolar implements RnEmbeddedChart {
 				RealVector realVector = (RealVector) this.getPreImage(new RealVector(nums));
 				RealBasedVector vec = new RealBasedVector(realVector);
 				vec.setDirection(direction);
-				RealBasedCurve curve = new RealBasedCurve(vec);
+				RealBasedCurve curve = new RealBasedCurve();
 				curve.setCoordinate(true);
 
 				for (int j = 0; j < RnEmbeddedManifold.coordinateGranularity; j++) {
@@ -138,7 +146,7 @@ public class Sphere2ChartPolar implements RnEmbeddedChart {
 				realVector = (RealVector) this.getPreImage(new RealVector(nums));
 				vec = new RealBasedVector(realVector);
 				vec.setDirection(direction);
-				curve = new RealBasedCurve(vec);
+				curve = new RealBasedCurve();
 				curve.setCoordinate(true);
 
 				for (int j = 0; j < RnEmbeddedManifold.coordinateGranularity; j++) {
@@ -162,5 +170,9 @@ public class Sphere2ChartPolar implements RnEmbeddedChart {
 		}
 
 		return curves;
+	}
+
+	public RealVector getDirection(RealVector vector) {
+		return vector.multiply(new RealNumber(1/vector.getLength()));
 	}
 }

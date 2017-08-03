@@ -1,9 +1,7 @@
 package com.gruber.pfr.space.manifold.realembedded.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import com.gruber.pfr.graphics.elements.Coordinates;
 import com.gruber.pfr.graphics.visualizations.realbased.RealBasedCurve;
 import com.gruber.pfr.space.base.Set;
 import com.gruber.pfr.space.manifold.Atlas;
@@ -16,27 +14,24 @@ import com.gruber.pfr.space.numbers.real.RnSpace;
 
 public class Sphere2Manifold extends RnEmbeddedManifold {
 	
-	List<RealBasedCurve> curves;
-	
+// only coordinates
 	public Sphere2Manifold(List<Chart> charts, int length, int granularity) {
 		
-		super(length, granularity);
+		super(null, length, granularity);
 		this.setAtlas(new Atlas(charts));
 	}
 
-	public List<RealBasedCurve> getCurves() {
+	// starting point
+	public Sphere2Manifold(RealVector startingPoint, List<Chart> charts, int length, int granularity) {
 		
-		if(curves != null)
-			return this.curves;
-		
-// get the coordinates
+		super(startingPoint, length, granularity);
+		this.setAtlas(new Atlas(charts));
+	}
+	
+	public List<RealBasedCurve> getCoordinates() {
+
 		RnEmbeddedChart chart = (RnEmbeddedChart)this.getAtlas().getCharts().get(0);
-		List<RealBasedCurve> coordCurves =  chart.getCoordinates();
-		
-		curves = new ArrayList<RealBasedCurve>();
-		curves.addAll(coordCurves);
-		
-		return curves;
+		return  chart.getCoordinates();
 	}
 
 	public boolean isElement(Set set) {

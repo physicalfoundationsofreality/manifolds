@@ -26,7 +26,10 @@ public class RealBasedCurve {
 		
 		this.refreshCurve();
 	}
-	
+	public RealBasedCurve() {
+		super();		
+		this.refreshCurve();
+	}
 	public boolean isCoordinate() {
 		return isCoordinate;
 	}
@@ -71,5 +74,12 @@ public class RealBasedCurve {
 		this.directionColor = directionColor;
 	}
 
-
+	public RealBasedVector getLastPoint() {
+		
+		if(curve.isEmpty())
+			return this.startingPoint;
+		
+		int last = this.curve.size() - 1;
+		return this.curve.get(last);
+	}
 }

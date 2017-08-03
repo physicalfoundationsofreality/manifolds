@@ -1,7 +1,6 @@
 package com.gruber.pfr.graphics.visualizations.realbased;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -9,9 +8,7 @@ import com.gruber.pfr.graphics.GraphWizard;
 import com.gruber.pfr.graphics.SimpleCurve;
 import com.gruber.pfr.graphics.Visualization2D;
 import com.gruber.pfr.graphics.elements.Coordinates2D;
-import com.gruber.pfr.space.numbers.real.RealNumber;
 import com.gruber.pfr.space.numbers.real.RealVector;
-import com.gruber.pfr.space.vectors.knspaces.KnVector.InvalidElementsException;
 
 public class RealBasedCurves2DMultiProjection implements Visualization2D {
 
@@ -140,15 +137,18 @@ public class RealBasedCurves2DMultiProjection implements Visualization2D {
 
 				// draw coordinates only once
 				RealBasedCurve realCurve = curvesIter.next();
+				
 				if (realCurve.isCoordinate() && i > 0)
 					continue;
 
-				SimpleCurve curve = new SimpleCurve(map2d[i].getOriginColor(), map2d[i].getDirectionColor(),
-						realCurve.getStartingPoint().asVector(), functionTypeSpaceCurve);
+				SimpleCurve curve = new SimpleCurve(map2d[i].getOriginColor(), map2d[i].getDirectionColor(), functionTypeSpaceCurve);
 				if (realCurve.isCoordinate())
 					curve.setFunctionType(this.functionTypeCoordinates);
 				else
 					curve.setFunctionType(this.functionTypeSpaceCurve);
+				
+				if(curve.getFunctionType().equals(GraphWizard.FunctionType.NONE))
+					continue;
 
 				Iterator<RealBasedVector> curveIter = realCurve.getCurve().iterator();
 				while (curveIter.hasNext()) {

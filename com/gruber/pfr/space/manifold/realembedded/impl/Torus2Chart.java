@@ -116,7 +116,7 @@ public class Torus2Chart implements RnEmbeddedChart {
 				RealVector realVector = (RealVector) this.getPreImage(new RealVector(nums));
 				RealBasedVector vec = new RealBasedVector(realVector);
 				vec.setDirection(direction);
-				RealBasedCurve curve = new RealBasedCurve(vec);
+				RealBasedCurve curve = new RealBasedCurve();
 				curve.setCoordinate(true);
 
 				for (int j = 0; j < RnEmbeddedManifold.coordinateGranularity; j++) {
@@ -141,7 +141,7 @@ public class Torus2Chart implements RnEmbeddedChart {
 				realVector = (RealVector) this.getPreImage(new RealVector(nums));
 				vec = new RealBasedVector(realVector);
 				vec.setDirection(direction);
-				curve = new RealBasedCurve(vec);
+				curve = new RealBasedCurve();
 				curve.setCoordinate(true);
 
 				for (int j = 0; j < RnEmbeddedManifold.coordinateGranularity; j++) {
@@ -164,5 +164,8 @@ public class Torus2Chart implements RnEmbeddedChart {
 		}
 
 		return curves;
+	}
+	public RealVector getDirection(RealVector vector) {
+		return null;
 	}
 }

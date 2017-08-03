@@ -72,10 +72,10 @@ public class Sphere2ChartProj implements RnEmbeddedChart {
 
 		RealVector vec = (RealVector) point;
 
-		if (!(vec.getDim() == 3 && vec.getLength() == 1))
-			return false;
+//		if (!(vec.getDim() == 3 && vec.getLength() == 1))  We assume the point from manifold
+//		return false;
 
-		return vec.getElements()[0].equals((RealNumber) RealNumbers.getInstance().getOneElement());
+		return !vec.getElements()[0].equals((RealNumber) RealNumbers.getInstance().getOneElement());
 	}
 
 	public boolean isInRange(RealVector vec) {
@@ -102,7 +102,7 @@ public class Sphere2ChartProj implements RnEmbeddedChart {
 				RealVector realVector = (RealVector) this.getPreImage(new RealVector(nums));
 				RealBasedVector vec = new RealBasedVector(realVector);
 				vec.setDirection(direction);
-				RealBasedCurve curve = new RealBasedCurve(vec);
+				RealBasedCurve curve = new RealBasedCurve();
 				curve.setCoordinate(true);
 
 				for (int j = 0; j < RnEmbeddedManifold.coordinateGranularity; j++) {
@@ -124,7 +124,7 @@ public class Sphere2ChartProj implements RnEmbeddedChart {
 				realVector = (RealVector) this.getPreImage(new RealVector(nums));
 				vec = new RealBasedVector(realVector);
 				vec.setDirection(direction);
-				curve = new RealBasedCurve(vec);
+				curve = new RealBasedCurve();
 				curve.setCoordinate(true);
 
 				for (int j = 0; j < RnEmbeddedManifold.coordinateGranularity; j++) {
@@ -147,5 +147,8 @@ public class Sphere2ChartProj implements RnEmbeddedChart {
 		}
 
 		return curves;
+	}
+	public RealVector getDirection(RealVector vector) {
+		return vector.multiply(new RealNumber(1/vector.getLength()));
 	}
 }

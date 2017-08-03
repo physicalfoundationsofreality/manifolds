@@ -5,9 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.gruber.pfr.graphics.elements.Coordinates;
-import com.gruber.pfr.space.numbers.real.RealNumber;
 import com.gruber.pfr.space.numbers.real.RealVector;
-import com.gruber.pfr.space.vectors.knspaces.KnVector.InvalidElementsException;
 import com.gruber.pfr.space.vectors.linearmaps.FiniteDimensionalLinearMap;
 
 public class RealBasedCurvesProjection implements RealBasedVisualization {
