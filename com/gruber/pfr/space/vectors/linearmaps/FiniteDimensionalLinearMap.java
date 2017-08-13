@@ -48,7 +48,7 @@ public class FiniteDimensionalLinearMap extends LinearMap {
 				kerVec[i - matrix.getRank()] = (FiniteDimensionalVector) kerVec[i - matrix.getRank()]
 						.add(domain.getBaseVectors()[j].multiply(vec[j]));
 		}
-		kernel = new VectorSpan(kerVec, domain);
+		kernel = new VectorSpan(kerVec, domain.getBaseSpace());
 
 		// get image: if A*M = RN and e in Image RN -> inv(A)*e in Image M
 		FiniteDimensionalVector[] imVec = new FiniteDimensionalVector[matrix.getRank()];
@@ -61,7 +61,7 @@ public class FiniteDimensionalLinearMap extends LinearMap {
 			for (int j = 0; j < matrix.getRownNumber(); j++)
 				imVec[i] = (FiniteDimensionalVector) imVec[i].add(range.getBaseVectors()[j].multiply(vec[j]));
 		}
-		image = new VectorSpan(imVec, range);
+		image = new VectorSpan(imVec, range.getBaseSpace());
 
 		/*
 		 * get the cokernel as a complement to the kernel: Let MC be Matrix from
@@ -88,7 +88,7 @@ public class FiniteDimensionalLinearMap extends LinearMap {
 			}
 		}
 		isoMatrix = new FiniteMatrix(matrix.getBaseRing(), isoEls);
-		coKernel = new VectorSpan(cokerVec, domain);
+		coKernel = new VectorSpan(cokerVec, domain.getBaseSpace());
 	}
 
 	public FiniteDimensionalVectorSpaceBasis getDomainBasis() {

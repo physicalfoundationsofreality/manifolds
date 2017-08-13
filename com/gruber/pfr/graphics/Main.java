@@ -54,8 +54,7 @@ public class Main {
 
 		JFrame f = new JFrame("Graph Wizard");
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-		GraphWizard ap = new GraphWizard(manifoldSimplePath(), new Dimension(1100, 1100), false);
+		GraphWizard ap = new GraphWizard(vectorTest2(), new Dimension(1100, 1100), false);
 
 		ap.init();
 		ap.start();

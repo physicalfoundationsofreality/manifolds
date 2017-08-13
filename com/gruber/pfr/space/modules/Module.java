@@ -6,6 +6,9 @@ import com.gruber.pfr.space.base.Operation;
 import com.gruber.pfr.space.base.Set;
 import com.gruber.pfr.space.rings.Ring;
 import com.gruber.pfr.space.rings.RingElement;
+import com.gruber.pfr.space.vectors.SubSpace;
+import com.gruber.pfr.space.vectors.Vector;
+import com.gruber.pfr.space.vectors.basis.VectorSpan;
 
 public abstract class Module implements AdditiveSpace, Cloneable{
 
@@ -82,4 +85,5 @@ public abstract class Module implements AdditiveSpace, Cloneable{
 			return null;
 		}
 	}
+	public abstract Module getNullSpace();
 }

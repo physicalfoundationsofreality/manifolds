@@ -1,8 +1,14 @@
 package com.gruber.pfr.space.vectors;
 
-public interface SubSpace {
+import com.gruber.pfr.space.modules.SubModule;
 
-	public VectorSpace getBaseSpace();
+public interface SubSpace extends SubModule {
+
+	default public VectorSpace getBaseSpace() {
+		return (VectorSpace) this.getBaseModule();
+	}
 	
-	public void setBaseSpace(VectorSpace space);
+	default public void setBaseSpace(VectorSpace space) {
+		this.setBaseModule(space);
+	}
 }

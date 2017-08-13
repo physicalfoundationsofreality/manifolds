@@ -2,6 +2,7 @@ package com.gruber.pfr.space.vectors.basis;
 
 import com.gruber.pfr.space.base.AutoOperation;
 import com.gruber.pfr.space.base.Set;
+import com.gruber.pfr.space.modules.Module;
 import com.gruber.pfr.space.rings.Field;
 import com.gruber.pfr.space.vectors.FiniteDimensionalVector;
 import com.gruber.pfr.space.vectors.FiniteDimensionalVectorSpace;
@@ -14,12 +15,12 @@ public class VectorSpan extends FiniteDimensionalVectorSpace implements SubSpace
 	FiniteDimensionalVectorSpaceBasis basis;
 	VectorSpace baseSpace;
 
-	public VectorSpan(FiniteDimensionalVector[] baseVectors, FiniteDimensionalVectorSpaceBasis supBasis) {
+	public VectorSpan(Vector[] baseVectors, VectorSpace baseSpace) {
 
-		super((Field) baseVectors[0].getSpace().getBaseRing(), (AutoOperation) supBasis.getBaseSpace().getAddition(),
-				supBasis.getBaseSpace().getMultiplication(), baseVectors.length);
-		this.baseSpace = supBasis.getBaseSpace();
-		this.basis = new DerivedFiniteVectorSpaceBasis(baseVectors, this, supBasis);
+		super((Field) baseVectors[0].getSpace().getBaseRing(), (AutoOperation) baseSpace.getAddition(),
+				baseSpace.getMultiplication(), baseVectors.length);
+		this.baseSpace = baseSpace;
+		this.basis = new DerivedFiniteVectorSpaceBasis(baseVectors, this);
 	}
 
 	public Set getNullElement() {
@@ -58,20 +59,11 @@ public class VectorSpan extends FiniteDimensionalVectorSpace implements SubSpace
 		this.basis = basis;
 	}
 
-//	public Vector getProjection(Vector vector) {
-//
-//		Vector vec = (Vector) this.getNullElement();
-//		for (int i = 0; i < this.getDim(); i++) {
-//			vec.add(this.basis.getBaseVectors()[i].multiply(this.basis.getCoordinate(i, vector)));
-//		}
-//		return vec;
-//	}
-
-	public VectorSpace getBaseSpace() {
-		return baseSpace;
+	public void setBaseModule(Module baseSpace) {
+		this.baseSpace = (VectorSpace)baseSpace;
 	}
 
-	public void setBaseSpace(VectorSpace baseSpace) {
-		this.baseSpace = baseSpace;
+	public Module getBaseModule() {
+		return this.baseSpace;
 	}
 }

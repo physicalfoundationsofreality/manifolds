@@ -1,7 +1,5 @@
 package com.gruber.pfr.space.numbers.real;
 
-import java.util.Arrays;
-
 import com.gruber.pfr.space.rings.RingElement;
 import com.gruber.pfr.space.vectors.Vector;
 import com.gruber.pfr.space.vectors.knspaces.KnSpace;
@@ -9,8 +7,6 @@ import com.gruber.pfr.space.vectors.knspaces.KnVector;
 import com.gruber.pfr.space.vectors.knspaces.KnVector.InvalidElementsException;
 
 public class RnSpace extends KnSpace {
-
-	static RnSpace[] RnSpaces = new RnSpace[20];
 	
 	protected RnSpace(int dim) {
 		super(RealNumbers.getInstance(), dim);
@@ -18,13 +14,7 @@ public class RnSpace extends KnSpace {
 	
 	public static KnSpace getInstance(int dim) {
 		
-		if(RnSpaces.length < dim + 1)
-			RnSpaces = Arrays.copyOf(RnSpaces, dim + 1);
-		
-		if(RnSpaces[dim] == null)
-			RnSpaces[dim] = new RnSpace(dim);
-		
-		return RnSpaces[dim];
+		return KnSpace.getKnSpace(RealNumbers.getInstance(), dim);
 	}
 	public RealNumber innerProduct(RealVector vec1, RealVector vec2) {
 

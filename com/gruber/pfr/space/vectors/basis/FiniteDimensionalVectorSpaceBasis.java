@@ -11,18 +11,18 @@ import com.gruber.pfr.space.vectors.VectorSpace;
 
 public abstract class FiniteDimensionalVectorSpaceBasis implements VectorSpaceBasis {
 
-	FiniteDimensionalVector[] baseVectors;
+	Vector[] baseVectors;
 	FiniteDimensionalVectorSpace space;
 	Random rand = new Random(System.currentTimeMillis());
 
 	public FiniteDimensionalVectorSpaceBasis(FiniteDimensionalVectorSpace space,
-			FiniteDimensionalVector[] baseVectors) {
+			Vector[] baseVectors) {
 
 		this.space = space;
 		this.baseVectors = baseVectors;
 	}
 
-	public FiniteDimensionalVector[] getBaseVectors() {
+	public Vector[] getBaseVectors() {
 		return baseVectors;
 	}
 
@@ -73,7 +73,7 @@ public abstract class FiniteDimensionalVectorSpaceBasis implements VectorSpaceBa
 	// Resort by exchanging two basis elements
 	public void resortBasis(int i, int j) {
 
-		FiniteDimensionalVector veci = this.baseVectors[i];
+		Vector veci = this.baseVectors[i];
 		this.baseVectors[i] = this.baseVectors[j];
 		this.baseVectors[j] = veci;
 	}

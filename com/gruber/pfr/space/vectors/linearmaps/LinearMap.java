@@ -24,9 +24,4 @@ public abstract class LinearMap implements Map {
 
 		return this.range;
 	}
-	public abstract Module getKernel();
-	
-	public abstract Module getImage();
-	
-	public abstract LinearMap getInverse();
 }

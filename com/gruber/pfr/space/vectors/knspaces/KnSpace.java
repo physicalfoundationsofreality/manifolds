@@ -1,5 +1,8 @@
 package com.gruber.pfr.space.vectors.knspaces;
 
+import java.util.Arrays;
+import java.util.Hashtable;
+
 import com.gruber.pfr.space.base.AutoOperation;
 import com.gruber.pfr.space.base.Operation.OperantException;
 import com.gruber.pfr.space.base.Set;
@@ -15,8 +18,29 @@ import com.gruber.pfr.space.vectors.knspaces.KnVector.InvalidElementsException;
 public class KnSpace extends FiniteDimensionalVectorSpace implements InnerProductSpace {
 
 	KnInnerProduct innerProduct;
+	
+	static Hashtable<Field,KnSpace[]> spaces = new Hashtable<Field,KnSpace[]>();
+	
+	public static KnSpace getKnSpace(Field baseField, int dim) {
+		
+		KnSpace[] kn = spaces.get(baseField);
+		
+		if(kn == null) 
+			kn = new KnSpace[dim + 1];
 
-	public KnSpace(Field baseField, int dim) {
+		if(kn.length <= dim)
+			kn = Arrays.copyOf(kn, dim + 1);
+		
+		if(kn[dim] == null)
+			kn[dim] = new KnSpace(baseField,dim);
+		
+			spaces.put(baseField, kn);
+			
+			return kn[dim];
+		
+	}
+
+	protected KnSpace(Field baseField, int dim) {
 
 		super(baseField, new KnAddition(), new KnScalarMultiplication(), dim);
 
