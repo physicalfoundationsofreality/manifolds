@@ -1,4 +1,4 @@
-package com.gruber.pfr.space.vectors.linearmaps.homsapce;
+package com.gruber.pfr.space.vectors.linearmaps.homspace;
 
 import com.gruber.pfr.space.vectors.VectorSpace;
 import com.gruber.pfr.space.vectors.basis.VectorSpaceBasis;

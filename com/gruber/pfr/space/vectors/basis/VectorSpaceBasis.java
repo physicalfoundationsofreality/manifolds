@@ -12,6 +12,8 @@ public interface VectorSpaceBasis extends LinearIndependentSet {
 	public RingElement getCoordinate(Vector baseVector, Vector vector);
 	
 	public VectorSpace getBaseSpace();
+	
+//	public Hashtable<Vector,RingElement> getNontrivialCoordinates(Vector vector) ;
 
 	public void setBaseSpace(VectorSpace space);
 	

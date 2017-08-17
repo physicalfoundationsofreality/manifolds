@@ -34,7 +34,7 @@ public abstract class FiniteDimensionalVectorSpaceBasis implements VectorSpaceBa
 
 		return els;
 	}
-
+	
 	public void setBaseVectors(FiniteDimensionalVector[] baseVectors) {
 		this.baseVectors = baseVectors;
 	}

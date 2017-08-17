@@ -4,7 +4,6 @@ import com.gruber.pfr.space.base.AutoOperation;
 import com.gruber.pfr.space.base.Set;
 import com.gruber.pfr.space.modules.Module;
 import com.gruber.pfr.space.rings.Field;
-import com.gruber.pfr.space.vectors.FiniteDimensionalVector;
 import com.gruber.pfr.space.vectors.FiniteDimensionalVectorSpace;
 import com.gruber.pfr.space.vectors.SubSpace;
 import com.gruber.pfr.space.vectors.Vector;

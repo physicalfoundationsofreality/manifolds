@@ -1,4 +1,4 @@
-package com.gruber.pfr.space.vectors.linearmaps.homsapce;
+package com.gruber.pfr.space.vectors.linearmaps.homspace;
 
 import com.gruber.pfr.space.rings.RingElement;
 import com.gruber.pfr.space.vectors.Vector;

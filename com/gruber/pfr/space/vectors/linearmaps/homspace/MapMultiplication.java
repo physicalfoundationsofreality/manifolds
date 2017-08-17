@@ -1,4 +1,4 @@
-package com.gruber.pfr.space.vectors.linearmaps.homsapce;
+package com.gruber.pfr.space.vectors.linearmaps.homspace;
 
 import com.gruber.pfr.space.base.Set;
 import com.gruber.pfr.space.modules.ScalarMultiplication;
